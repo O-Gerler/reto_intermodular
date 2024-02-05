@@ -22,8 +22,9 @@ services:
     ports:
       - '8085:8000'
     environment:
-      - DB_HOST=185.60.40.210
+      - DB_HOST=10.10.17.163
       - DB_PORT=3306
+      - DB_ROOT_PASSWORD=12345678
       - DB_USERNAME=Oier
       - DB_PASSWORD=12345678
       - DB_DATABASE=Oier
@@ -35,10 +36,25 @@ services:
     ports:
       - '8086:8000'
     environment:
-      - DB_HOST=185.60.40.210
+      - DB_HOST=10.10.17.163
       - DB_PORT=3306
       - DB_USERNAME=Oier
       - DB_PASSWORD=12345678
       - DB_DATABASE=Oier
     volumes:
       - './datos/euskoclima-api:/app'
+
+  mysql:
+    image: mysql:latest
+    container_name: MySql
+    environment:
+      MYSQL_DATABASE: 'EuskoClima'
+      MYSQL_USER: 'Oier'
+      MYSQL_PASSWORD: '12345678'
+      MYSQL_ROOT_PASSWORD: '12345678'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - './my-db:/var/lib/mysql'

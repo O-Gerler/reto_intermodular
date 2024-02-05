@@ -51,8 +51,6 @@ class FetchApiDataEuskalmetLocalizaciones extends Command
         $ciudades = ['irun', 'donostia', 'hondarribia', 'oiartzun', 'bilbao', 'gasteiz'];
 
         foreach($zonasEuskalmet as $zonaEuskalmet) {
-
-            
             $apiUrl = 'https://api.euskadi.eus/euskalmet/geo/regions/' . $zonaEuskalmet['cod_region'] .'/zones/' . $zonaEuskalmet['cod_zona'] . '/locations';
             
             // Configuración del cliente Guzzle

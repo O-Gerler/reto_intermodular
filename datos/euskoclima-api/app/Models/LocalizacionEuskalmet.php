@@ -5,27 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Medicion extends Model
+class LocalizacionEuskalmet extends Model
 {
     use HasFactory;
 
-    protected $table = 'mediciones';
+    protected $table = 'localizaciones_euskalmet';
     public $timestamps = false;
 
+
     protected $fillable = [
-        'id_localizacion',
-        'fecha',
-        'hora',
-        'temp',
-        'temp_max',
-        'temp_min',
-        'humedad',
-        'viento',
-        'precipitacion'
+        'nombre',
+        'id_zona_euskalmet',
     ];
 
-    public function localizacion() 
+    public function localizacion()
     {
         return $this->belongsTo(Localizacion::class);
+    }
+
+    public function zonaEuskalmet()
+    {
+        return $this->belongsTo(ZonaEuskalmet::class);
     }
 }

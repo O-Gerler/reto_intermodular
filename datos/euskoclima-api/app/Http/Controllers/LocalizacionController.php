@@ -12,7 +12,19 @@ class LocalizacionController extends Controller
      */
     public function index()
     {
-        return Localizacion::all();
+        $localizaciones = Localizacion::all();
+        $zonaEltiempoController = new ZonaElTiempoController();
+        $localizacionEuskalmetController = new LocalizacionEuskalmetController();
+
+        foreach($localizaciones as $localizacion) {
+            $localizacion->id_zona_el_tiempo = $zonaEltiempoController->getById($localizacion->id_zona_el_tiempo);
+            $localizacion->id_localizacion_euskalmet = $localizacionEuskalmetController->getById($localizacion->id_localizacion_euskalmet);
+        }
+
+        return response()->json([
+            'message' => 'okey',
+            'localizaciones' => $localizaciones
+        ], 200);
     }
 
     /**

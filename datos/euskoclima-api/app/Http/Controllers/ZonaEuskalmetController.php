@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Zona_euskalmet;
+use App\Models\ZonaEuskalmet;
 use Illuminate\Http\Request;
 
 class ZonaEuskalmetController extends Controller
 {
+    public function getById($id) {
+        $resultadoJSON = ZonaEuskalmet::where('id', '=', $id)->get();
+
+        $resultado = json_decode($resultadoJSON, true);
+
+        return $resultado;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $zona_euskalmet = Zona_euskalmet::all();
-
-        return $zona_euskalmet;
+        //
     }
 
     /**
@@ -36,32 +41,15 @@ class ZonaEuskalmetController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Zona_euskalmet $zona_euskalmet)
+    public function show(ZonaEuskalmet $zonaEuskalmet)
     {
-        return response()->json([
-            'zona_euskalmet' => $zona_euskalmet,
-            'status' => true,
-        ], 202);
-    }
-
-    public function getById($id)
-    {
-        $resultado = Zona_euskalmet::where('id', '=', $id)->get();
-
-        return $resultado;
-    }
-
-    public function getByName($name)
-    {
-        $resultado = Zona_euskalmet::where('name', '=', $name)->get();
-
-        return $resultado;
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Zona_euskalmet $zona_euskalmet)
+    public function edit(ZonaEuskalmet $zonaEuskalmet)
     {
         //
     }
@@ -69,7 +57,7 @@ class ZonaEuskalmetController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Zona_euskalmet $zona_euskalmet)
+    public function update(Request $request, ZonaEuskalmet $zonaEuskalmet)
     {
         //
     }
@@ -77,7 +65,7 @@ class ZonaEuskalmetController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Zona_euskalmet $zona_euskalmet)
+    public function destroy(ZonaEuskalmet $zonaEuskalmet)
     {
         //
     }

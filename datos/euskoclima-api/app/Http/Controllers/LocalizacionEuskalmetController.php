@@ -7,6 +7,20 @@ use Illuminate\Http\Request;
 
 class LocalizacionEuskalmetController extends Controller
 {
+    public function getById() {
+        $id = '325';
+        $zonaEuskalmetController = new ZonaEuskalmetController();
+
+        $localizacionEuskalmetJSON = LocalizacionEuskalmet::where('id', '=', '325')->get();
+
+        $localizacionEuskalmet = json_decode($localizacionEuskalmetJSON, true);
+
+        $localizacion = $localizacionEuskalmet[0];
+
+        $localizacion['id_zona_euskalmet'] = $zonaEuskalmetController->getById($localizacion['id_zona_euskalmet']);
+
+        return $localizacion;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -37,13 +51,6 @@ class LocalizacionEuskalmetController extends Controller
     public function show(LocalizacionEuskalmet $localizacionEuskalmet)
     {
         //
-    }
-
-    public function getByName($name)
-    {
-        $resultado = LocalizacionEuskalmet::where('nombre', '=', $name)->get();
-
-        return $resultado;
     }
 
     /**

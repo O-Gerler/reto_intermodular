@@ -2,20 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Zona_el_tiempo;
+use App\Models\ZonaElTiempo;
 use Illuminate\Http\Request;
 
 class ZonaElTiempoController extends Controller
 {
+    public function getById($id) {
+        $resultadoJSON = ZonaElTiempo::where('id', '=', $id)->get();
+
+        $resultado = json_decode($resultadoJSON, true);
+
+        return $resultado[0];
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $zonas_el_timepo = Zona_el_tiempo::all();
-
-        return $zonas_el_timepo;
+        //
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -35,32 +41,15 @@ class ZonaElTiempoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Zona_el_tiempo $zona_el_tiempo)
+    public function show(ZonaElTiempo $zonaElTiempo)
     {
-        return response()->json([
-            'zona_el_tiempo' => $zona_el_tiempo,
-            'status' => true,
-        ], 202);
-    }
-
-    public function getById($id)
-    {
-        $resultado = Zona_el_tiempo::where('id', '=', $id)->get();
-
-        return $resultado;
-    }
-
-    public function getByName($name)
-    {
-        $resultado = Zona_el_tiempo::where('nombre', '=', $name)->get();
-
-        return $resultado;
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Zona_el_tiempo $zona_el_tiempo)
+    public function edit(ZonaElTiempo $zonaElTiempo)
     {
         //
     }
@@ -68,7 +57,7 @@ class ZonaElTiempoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Zona_el_tiempo $zona_el_tiempo)
+    public function update(Request $request, ZonaElTiempo $zonaElTiempo)
     {
         //
     }
@@ -76,7 +65,7 @@ class ZonaElTiempoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Zona_el_tiempo $zona_el_tiempo)
+    public function destroy(ZonaElTiempo $zonaElTiempo)
     {
         //
     }
