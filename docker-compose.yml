@@ -5,7 +5,7 @@ services:
     #servidor de apache n.1
     image: httpd:latest #imagen del contenedor
     volumes:
-      - ./datos/web/:/usr/local/apache2/htdocs/ #a que documento hace referencia
+      - ./datos/web/reto-intemodular-clima-main:/usr/local/apache2/htdocs/ #a que documento hace referencia
     ports:
       #puertos
       - "8081:80"
@@ -22,12 +22,11 @@ services:
     ports:
       - '8085:8000'
     environment:
-      - DB_HOST=10.10.17.163
+      - DB_HOST=10.10.17.110
       - DB_PORT=3306
-      - DB_ROOT_PASSWORD=12345678
       - DB_USERNAME=Oier
       - DB_PASSWORD=12345678
-      - DB_DATABASE=Oier
+      - DB_DATABASE=EuskoClima
     volumes:
       - './datos/alimentador:/app'
 
@@ -36,11 +35,11 @@ services:
     ports:
       - '8086:8000'
     environment:
-      - DB_HOST=10.10.17.163
+      - DB_HOST=10.10.17.110
       - DB_PORT=3306
       - DB_USERNAME=Oier
       - DB_PASSWORD=12345678
-      - DB_DATABASE=Oier
+      - DB_DATABASE=EuskoClima
     volumes:
       - './datos/euskoclima-api:/app'
 

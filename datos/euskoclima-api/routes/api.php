@@ -24,12 +24,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
-Route::get('mediciones/{ciudades}', [MedicionController::class, 'getByIds']);
-Route::get('historicoPorDias', [MedicionController::class, 'getMedicionesCiudadPorDia']);
-Route::get('historicoPorHoras', [MedicionController::class, 'getMedicionesCiudadPorHora']);
-Route::get('historico', [MedicionController::class, 'getMedicionesHoyCiudad']);
 
 Route::middleware('auth:api')->group(function() {
     Route::get('logout', [AuthController::class, 'logout']);
     Route::get('localizaciones', [LocalizacionController::class, 'index']);
+    Route::get('mediciones/{ciudades}', [MedicionController::class, 'getByIds']);
+    Route::get('historicoPorDias/{id}/{fecha}', [MedicionController::class, 'getMedicionesCiudadPorDia']);
+    Route::get('historicoPorHoras/{id}/{fecha}', [MedicionController::class, 'getMedicionesCiudadPorHora']);
+    Route::get('historico/{id}', [MedicionController::class, 'getMedicionesHoyCiudad']);
 });

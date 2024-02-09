@@ -30,9 +30,8 @@ class MedicionController extends Controller
     {
         $fechaHoy = Carbon::now()->toDateString(); // Obtener la fecha actual en formato 'Y-m-d'
 
-        $fechaInicio = '2024-01-10'; // Reemplaza esto con tu fecha final deseada
-
-        $idLocalizacion = 7;
+        $fechaInicio = $request['fecha']; 
+        $idLocalizacion = $request['id'];
 
         $registrosPorDia = Medicion::where('id_localizacion', $idLocalizacion)
             ->whereBetween('fecha', [$fechaInicio, $fechaHoy])
@@ -42,7 +41,7 @@ class MedicionController extends Controller
                 return Carbon::parse($date->fecha)->format('Y-m-d');
             })
             ->map(function ($group) {
-                return $group->first(); // Obtener solo el primer registro de cada grupo
+                return $group->first(); 
             });
 
         return response()->json([
@@ -52,11 +51,9 @@ class MedicionController extends Controller
 
     public function getMedicionesCiudadPorHora(Request $request)
     {
-        $fechaHoy = Carbon::now()->toDateString(); // Obtener la fecha actual en formato 'Y-m-d'
-
-        $fechaInicio = '2024-02-02';
-
-        $idLocalizacion = 7;
+        $fechaHoy = Carbon::now()->toDateString();
+        $fechaInicio = $request['fecha']; 
+        $idLocalizacion = $request['id'];
 
         $registrosPorHora = Medicion::where('id_localizacion', $idLocalizacion)
             ->whereBetween('fecha', [$fechaInicio, $fechaHoy])
@@ -67,7 +64,7 @@ class MedicionController extends Controller
                 return Carbon::parse("{$date->fecha} {$date->hora}")->format('Y-m-d H:00:00');
             })
             ->map(function ($group) {
-                return $group->first(); // Obtener solo el primer registro de cada grupo
+                return $group->first(); 
             });
 
         return response()->json([
@@ -77,13 +74,12 @@ class MedicionController extends Controller
 
     public function getMedicionesHoyCiudad(Request $request)
     {
-        $fechaHoy = '2024-01-31'; // Obtener la fecha actual en formato 'Y-m-d'
-
-        $idLocalizacion = 7;
+        $fechaHoy = Carbon::now()->toDateString();
+        $idLocalizacion = $request['id'];
 
         $registrosPorHora = Medicion::where('id_localizacion', $idLocalizacion)
             ->where('fecha', $fechaHoy)
-            ->orderBy('hora')  // Ordenar solo por la columna 'hora'
+            ->orderBy('hora')  
             ->get();
 
         return response()->json([

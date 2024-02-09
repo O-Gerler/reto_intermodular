@@ -7,11 +7,10 @@ use Illuminate\Http\Request;
 
 class LocalizacionEuskalmetController extends Controller
 {
-    public function getById() {
-        $id = '325';
+    public function getById($id) {
         $zonaEuskalmetController = new ZonaEuskalmetController();
 
-        $localizacionEuskalmetJSON = LocalizacionEuskalmet::where('id', '=', '325')->get();
+        $localizacionEuskalmetJSON = LocalizacionEuskalmet::where('id', '=', $id)->get();
 
         $localizacionEuskalmet = json_decode($localizacionEuskalmetJSON, true);
 
